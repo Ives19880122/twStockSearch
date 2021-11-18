@@ -59,7 +59,7 @@ export default {
     },
     async connectTwse() {
       const key = this.selectedId
-      const { data } = await axios.get(`https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_${key}.tw&json=1&delay=0`)
+      const { data } = await axios.post(`stock/realtime/${key}`)
       const [{ o: open, n: name, z: trade, h: high, l: low }] = data.msgArray
       const result = [
         `${key} ${name}`,
