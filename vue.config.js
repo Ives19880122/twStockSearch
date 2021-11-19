@@ -1,14 +1,17 @@
 module.exports = {
     assetsDir: 'statics',
     productionSourceMap: false,
-    devServer:{
-        open:true,
-        port:8080,
+
+    devServer: {
+        open: true,
+        port: 8081,
         proxy: {
-            '/stock/realtime': {
-              target:'http://localhost:9453',
-              changeOrigin:true,
+            '/api': {
+                target: 'http://localhost:9453',
+                changeOrigin: true,
             }
         },
-    }
+    },
+
+    publicPath: ''
 }

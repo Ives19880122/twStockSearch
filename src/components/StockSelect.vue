@@ -59,16 +59,18 @@ export default {
     },
     async connectTwse() {
       const key = this.selectedId
-      const { data } = await axios.post(`stock/realtime/${key}`)
-      const [{ o: open, n: name, z: trade, h: high, l: low }] = data.msgArray
-      const result = [
-        `${key} ${name}`,
-        `成交價 ${trade}`,
-        `開盤 ${open}`,
-        `最高 ${high}`,
-        `最低 ${low}`
-      ]
-      console.log(result)
+      const { data } = await axios.post(`/api/stock/realtime/${key}`)
+      if (data.msgArray.length > 0) {
+        const [{ o: open, n: name, z: trade, h: high, l: low }] = data.msgArray
+        const result = [
+          `${key} ${name}`,
+          `成交價 ${trade}`,
+          `開盤 ${open}`,
+          `最高 ${high}`,
+          `最低 ${low}`
+        ]
+        console.log(result)
+      }
     },
   },
 }
