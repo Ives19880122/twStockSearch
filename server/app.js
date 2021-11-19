@@ -14,16 +14,22 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json());    // can use request body
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compass({ mode: 'expanded' }));
 
-// router 綁定
-app.use('/api', indexRouter);
-const history = require('connect-history-api-fallback');
-app.use(express.static(path.join(__dirname, '../dist')));
-app.use(history());
+// router binding (vue path {dev:'/' , buid:'/api' )
+
+// for vue dev
+app.use('/', indexRouter);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// for vue build
+// app.use('/api', indexRouter);
+// const history = require('connect-history-api-fallback');
+// app.use(express.static(path.join(__dirname, '../dist')));
+// app.use(history());
 
 
 // catch 404 and forward to error handler
@@ -45,12 +51,12 @@ app.use(function (err, req, res, next) {
 var debug = require('debug')('my-application');
 app.set('port', process.env.PORT || 9453);
 
-// 啟動監聽
+// listen
 var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);
 });
 
-// 解決跨域問題
+// cors
 const cors = require('cors');
 app.use(cors({
     origin: ['http://localhost:8081'],

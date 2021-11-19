@@ -7,9 +7,15 @@ const router = express.Router();
 //     res.send("<h2>Welcome to Ives's stock server!!</h2>")
 // })
 
-router.post('/stock/realtime/:id', async (req, res) => {
+// for vue Dev or Build
+const pathDev = '/api'
+const pathBuild = ''
+
+router.post(`${pathDev}/stock/realtime`, async (req, res) => {
     try {
-        const url = `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_${req.params.id}.tw&json=1&delay=0`
+        const {ids} = req.body 
+        const param = ids.map(d=>`tse_${d}.tw`).join('|')
+        const url = `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=${param}&json=1&delay=0`
         const { data } = await axios.get(url)
         res.send(data)
     } catch (e) {
