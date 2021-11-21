@@ -10,15 +10,15 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Server init
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+open the other terminal
+cd server
+npm install
+node app.js
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### open the app in browser
+```
+http:localhost:8081
+```
