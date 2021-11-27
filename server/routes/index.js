@@ -1,6 +1,8 @@
 var express = require('express');
 const axios = require('axios')
 const router = express.Router();
+const twstockSevice = require('../service/index')
+const store = require('../store/index')
 
 /* GET users listing. */
 // router.get('/api', function (req, res) {
@@ -24,6 +26,19 @@ router.post(`${pathDev}/stock/realtime`, async (req, res) => {
     }
 })
 
+router.get(`${pathDev}/getStocks/`, async (req, res) => {
+    try {
+        let value = store.get('stocks')
+        if(!value){
+            value = await twstockSevice.getAll()
+            store.set('stocks',value,36000)
+        }
+        res.send(value)
+    } catch (e) {
+        console.log(`connect error: ${currentTime()}`)
+        res.send({})
+    }
+})
 
 const currentTime = () => {
     const d = new Date();
