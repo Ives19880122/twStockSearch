@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import stocks from '@/assets/twStocks.json'
 import axios from 'axios'
 
 export default {
@@ -44,7 +43,7 @@ export default {
   },
   data() {
     return {
-      stocks,
+      stocks:{},
       selectedId: [],
       disabled: false,
       result : [],
@@ -56,8 +55,13 @@ export default {
         {title:'最高',dataIndex:'high'}, 
         {title:'最低',dataIndex:'low'}
       ],
-      page:1
+      page:1,
+      path:{false:'/api',true:''}[process.env.NODE_ENV === 'production']
     }
+  },
+  async created(){
+    const {data} = await axios.get(`${this.path}/getStocks`)
+    this.stocks = data
   },
   methods: {
     changePage(page){
@@ -80,8 +84,7 @@ export default {
     },
     async connectTwse() {
       // judgement is dev or production
-      const path = {false:'/api',true:''}[process.env.NODE_ENV === 'production']
-      const { data } = await axios.post(`${path}/stock/realtime`,{ids:this.selectedId})
+      const { data } = await axios.post(`${this.path}/stock/realtime`,{ids:this.selectedId})
       const toZero2 = (val)=> {
         const compute = Math.floor(val * 100) / 100
         return isNaN(compute) ? '' : compute
