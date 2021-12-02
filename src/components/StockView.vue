@@ -35,6 +35,7 @@
 
 <script>
 import axios from 'axios'
+import twStocks from '../assets/twStocks.json'
 
 export default {
   name: 'StockSelect',
@@ -60,8 +61,8 @@ export default {
     }
   },
   async created(){
-    const {data} = await axios.get(`${this.path}/getStocks`)
-    this.stocks = data
+    // const {data} = await axios.get(`${this.path}/getStocks`)
+    this.stocks = twStocks
   },
   methods: {
     changePage(page){
