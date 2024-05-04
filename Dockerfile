@@ -43,5 +43,5 @@ COPY --from=maven_builder /app/target/stock-0.0.1-SNAPSHOT.jar ./app.jar
 # 暴露 Spring Boot 默认端口
 EXPOSE 8080
 
-# 启动 Spring Boot 应用
+# 啟動 Spring Boot
 CMD ["java", "-jar", "app.jar"]

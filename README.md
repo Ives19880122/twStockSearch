@@ -1,26 +1,15 @@
 # crawler_stocks
 
-## Project setup Client
+## Project setup
 
-```
-cd ./client
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+```cmd
+# 創建docker容器
+docker-compose up -d
 ```
 
-### Server init
-```
-open the other terminal
-cd server
-npm install
-node app.js
-```
+## open the app in browser
 
-### open the app in browser
-```
-http:localhost:8081
+```cmd
+# 呼叫本地端8080
+http://localhost:8080
 ```
