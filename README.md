@@ -1,7 +1,9 @@
 # crawler_stocks
 
-## Project setup
+## Project setup Client
+
 ```
+cd ./client
 npm install
 ```
 
