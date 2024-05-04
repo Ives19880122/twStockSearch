@@ -7,8 +7,11 @@ module.exports = {
         port: 8081,
         proxy: {
             '/api': {
-                target: 'http://localhost:9453',
+                target: 'http://localhost:8080',
                 changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '/'
+                }
             }
         },
     },
